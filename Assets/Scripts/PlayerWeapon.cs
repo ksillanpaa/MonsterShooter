@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
@@ -7,6 +8,8 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] BlasterShot _blasterShotPrefab;
     [SerializeField] LayerMask _aimLayerMask;
     [SerializeField] Transform _firePoint;
+
+    List<Powerup> _powerups = new List<Powerup>();
 
     float _nextFireTime;
     
@@ -40,8 +43,23 @@ public class PlayerWeapon : MonoBehaviour
 
      void Fire()
     {
-        _nextFireTime = Time.time + _delay;
+        float delay = _delay;
+        foreach(var powerup in _powerups){
+            delay *= powerup.DelayMultiplier;
+        }
+                    
+        _nextFireTime = Time.time + delay;
         var shot = Instantiate(_blasterShotPrefab, _firePoint.position, transform.rotation);
         shot.Launch(transform.forward);
     }
+
+    public void AddPowerup(Powerup powerup){
+        print("Powerup added");
+        _powerups.Add(powerup);
+    }
+    public void RemovePowerup(Powerup powerup) {
+        _powerups.Remove(powerup);
+        print("removing....");
+    } 
+    
 }

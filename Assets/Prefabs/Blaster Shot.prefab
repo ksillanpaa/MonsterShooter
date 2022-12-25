@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4365575880054798466}
   - component: {fileID: 6239895726302107569}
   - component: {fileID: 8152445676165509776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blaster Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
